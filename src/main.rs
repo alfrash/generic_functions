@@ -1,33 +1,38 @@
+use rand::*;
+
 fn pick<T>(value: u8, even: T, odd: T) -> T {
     if value % 2 == 0 { even } else { odd }
 }
 
-trait Random {
-    fn generate() -> Self;
-}
-
-impl Random for u64 {
+impl Random for u8 {
     fn generate() -> Self {
-        //return any random number
-        55
+        let mut rng = rand::rng();
+        rng.random_range(1..101)
     }
 }
 
 impl Random for &str {
     fn generate() -> Self {
-        "ahmed"
+        let names = ["Ahmed", "Sara", "Ali", "Fatima", "John"];
+        let mut rng = rand::rng();
+        let random_index = rng.random_range(0..names.len());
+        names[random_index]
     }
 }
 
+trait Random {
+    fn generate() -> Self;
+}
 fn my_random<T>() -> T
 where
     T: Random,
 {
-    T::generate()
+    Random::generate()
 }
 
-fn my_pick(v: u64) {
-    println!("you picked {}", v);
+// you can change type to u8 or &str
+fn pick_random(v: &str) {
+    println!("you picked: {}", v);
 }
 
 fn main() {
@@ -38,5 +43,5 @@ fn main() {
     println!("you picked: {}, it's {}", value, pick(value, 100, 200));
 
     let v = my_random();
-    my_pick(v);
+    pick_random(v);
 }
