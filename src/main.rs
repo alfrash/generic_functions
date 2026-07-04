@@ -1,5 +1,7 @@
 use rand::*;
 
+use crate::Either::That;
+
 fn pick<T>(value: u8, even: T, odd: T) -> T {
     if value % 2 == 0 { even } else { odd }
 }
@@ -35,6 +37,18 @@ fn pick_random(v: &str) {
     println!("you picked: {}", v);
 }
 
+enum Either<A, B> {
+    This(A),
+    That(B),
+}
+
+fn pick_either<A, B>(value: u8, even: A, odd: B) -> Either<A, B> {
+    if value % 2 == 0 {
+        Either::This(even)
+    } else {
+        Either::That(odd)
+    }
+}
 fn main() {
     let value = rand::random();
 
@@ -44,4 +58,17 @@ fn main() {
 
     let v = my_random();
     pick_random(v);
+    //you can change even or odd to be any type
+    // string and number
+    // string and string
+    // number and number
+    let output = pick_either(value, "eve", 3);
+    match output {
+        Either::This(even) => {
+            println!("you picked either: {}", even)
+        }
+        Either::That(odd) => {
+            println!("you picked either: {}", odd)
+        }
+    }
 }
