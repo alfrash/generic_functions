@@ -79,8 +79,12 @@ fn main() {
 
     let haidy = Employee {
         name: "Haidy".to_string(),
-        age: 20
+        age: 20,
     };
     println!("my name is {}", get_name(&ahmed));
     println!("older person is {}", who_is_older(&ahmed, &haidy));
+    println!(
+        "Either older person is {:?}",
+        either_is_older(&ahmed, &haidy)
+    );
 }
