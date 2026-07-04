@@ -1,6 +1,5 @@
+use generic_functions::*;
 use rand::*;
-
-use crate::Either::That;
 
 fn pick<T>(value: u8, even: T, odd: T) -> T {
     if value % 2 == 0 { even } else { odd }
@@ -71,4 +70,17 @@ fn main() {
             println!("you picked either: {}", odd)
         }
     }
+
+    //from lib
+    let ahmed = Employee {
+        name: "ahmed".to_string(),
+        age: 42,
+    };
+
+    let haidy = Employee {
+        name: "Haidy".to_string(),
+        age: 20
+    };
+    println!("my name is {}", get_name(&ahmed));
+    println!("older person is {}", who_is_older(&ahmed, &haidy));
 }
